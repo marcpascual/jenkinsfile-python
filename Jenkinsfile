@@ -1,7 +1,18 @@
+/*
+	Declarative pipeline example
+
+	urls:
+		https://jenkins.io/doc/book/pipeline/getting-started/
+		https://jenkins.io/doc/book/pipeline/jenkinsfile/
+*/
+
 pipeline {
 	/*
 		this can also be a labelled worker agent
   	agent { label 'slave1' }
+		agent any
+  	node { label 'slave1' }
+		node any
 	*/
   agent { docker { image 'python:3.5.1' } }
 
@@ -10,6 +21,7 @@ pipeline {
 		MESSAGE = 'hello world'
 	}
 
+	/* timeout this job in X mins */
 	options {
 		timeout(10)
 	}
@@ -27,22 +39,33 @@ pipeline {
       }
     }
 
-    stage('build 1') {
+    stage('build') {
+
+			/* we are on the master branch, but for some reason this
+			step was skipped
+
 			when {
 				branch '*/master'
 			}
+			*/
+
       steps {
         sh 'python --version'
       }
     }
 
-    stage('build 2') {
+    stage('test') {
       steps {
         sh 'python --version'
       }
     }
 
-    stage('postbuild') {
+    stage('deploy') {
+			when {
+				expression {
+					currentBuild.result == null || currentBuild.result == 'SUCCESS'
+				}
+			}
       steps {
         sh 'uname -a; id'
       }
