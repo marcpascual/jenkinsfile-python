@@ -11,5 +11,10 @@ pipeline {
         sh 'python --version'
       }
     }
+    stage('postbuild') {
+      steps {
+        sh 'uname -a; id'
+      }
+    }
   }
 }
