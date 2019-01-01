@@ -29,7 +29,7 @@ pipeline {
 
   stages {
 
-    stage('prebuild') {
+    stage('setup') {
       steps {
         sh '''
           echo hello world
