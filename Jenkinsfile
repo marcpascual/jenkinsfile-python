@@ -43,11 +43,11 @@ pipeline {
 
 			/* we are on the master branch, but for some reason this
 			step was skipped
-
-			when {
-				branch '*/master'
-			}
 			*/
+
+			//when {
+			//	branch '*/master'
+			//}
 
       steps {
         sh 'python --version'
