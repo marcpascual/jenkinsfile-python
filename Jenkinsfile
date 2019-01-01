@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('prebuild') {
       steps {
-        sh 'whoami; id'
+        sh 'uname -a; id'
       }
     }
     stage('build') {
