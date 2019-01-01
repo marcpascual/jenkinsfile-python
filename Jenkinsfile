@@ -6,7 +6,12 @@ pipeline {
         sh 'uname -a; id'
       }
     }
-    stage('build') {
+    stage('build 1') {
+      steps {
+        sh 'python --version'
+      }
+    }
+    stage('build 2') {
       steps {
         sh 'python --version'
       }
